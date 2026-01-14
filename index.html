@@ -7,6 +7,21 @@
     <link href="style.css" rel="stylesheet" />
     <script src="script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      /* Initial state: Grayscale */
+      #about .about-image img {
+        filter: grayscale(100%);
+        transition: filter 1.5s ease-in-out 0.5s;
+      }
+      /* Active state: Colored */
+      #about .about-image img.reveal-color {
+        filter: grayscale(0%);
+      }
+      /* SVG Icon Hover Effect */
+      .social-icon:hover img {
+        filter: brightness(0.8);
+      }
+    </style>
   </head>
   <body>
     <!-- Navigation -->
@@ -17,9 +32,15 @@
         </div>
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
+          <li><a href="#latest-release">Release</a></li>
           <li><a href="#booking">Booking</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
       </div>
     </nav>
 
@@ -41,18 +62,43 @@
           <div class="about-text">
             <h2>About Dizzy</h2>
             <p>
-              Dizzy is a cutting-edge electronic music producer and DJ
-              specializing in techno and underground house. With years of
-              experience spinning at top clubs and festivals, Dizzy creates
-              immersive soundscapes that push boundaries and captivate audiences
-              worldwide. Known for deep, hypnotic beats and technical precision,
-              Dizzy brings raw energy and innovation to every performance.
+              DJ Dizzy is a passionate Egyptian DJ whose journey began
+               far from home, launching his career in Russia before 
+               taking his sound across more than eight countries. 
+               Known for his distinctive style, DJ Dizzy blends popular,
+                high-energy tracks with hypnotic 
+                underground techno and tech-house, creating sets that 
+                are both accessible and deeply immersive. His ability 
+                to bridge mainstream appeal with underground depth sets
+                him apart, allowing him to connect with diverse crowds
+                while maintaining a strong, authentic electronic identity.
+                Driven by rhythm, culture, and constant evolution, DJ Dizzy
+                continues to push boundaries on dance floors around the 
+                world.
             </p>
             <div class="skills">
               <span class="skill-tag">Techno</span>
               <span class="skill-tag">House</span>
               <span class="skill-tag">Electronic</span>
               <span class="skill-tag">Underground</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Release Section -->
+    <section id="latest-release" class="latest-release">
+      <div class="container">
+        <h2>Latest Release</h2>
+        <div class="release-layout">
+          <div class="release-text">
+            <h3>Midnight Protocol</h3>
+            <p>Experience the sound of the underground. Interact with the visualizer below to control the rhythm.</p>
+          </div>
+          <div class="interactive-area">
+            <div id="ps5-animation-container">
+              <video src="video/1.mp4" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
             </div>
           </div>
         </div>
@@ -101,7 +147,9 @@
             <a href="https://www.instagram.com/dj_dizzy_official/" class="social-icon" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
             <a href="https://soundcloud.com/marwan-sanad-338259448" class="social-icon" target="_blank" rel="noopener noreferrer"><i class="fab fa-soundcloud"></i></a>
             <a href="https://www.tiktok.com/@dj_dizzy_official" class="social-icon" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
-                 </div>
+            <a href="https://play.anghami.com/artist/13263872" class="social-icon" target="_blank" rel="noopener noreferrer" title="Anghami"><img src="images/anghamiIcon.svg" alt="Anghami" style="width: 1em; height: 1em; vertical-align: -0.125em;"></a>
+            <!-- ADD YOUTUBE & SPOTIFY & BEATPORT -->
+          </div>
       </div>
     </section>
 
@@ -110,5 +158,30 @@
       <p>&copy; 2026 DJ Dizzy. All rights reserved.</p>
       <p>Powered by Ice Smart Solutions</p>
     </footer>
+
+    <!-- Background Music (Hidden) -->
+    <audio id="bg-music" loop>
+      <source src="music/track.mpeg" type="audio/mpeg">
+    </audio>
+    <!-- Floating Mute Button -->
+    <button id="mute-toggle" class="mute-toggle" aria-label="Toggle Music">
+      <i class="fas fa-volume-mute"></i>
+    </button>
+
+    <script>
+      // Intersection Observer to handle scroll detection
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-color');
+          }
+        });
+      }, { threshold: 0.3 }); // Trigger when 30% of the image is visible
+
+      const targetImage = document.querySelector('.about-image img');
+      if (targetImage) {
+        imageObserver.observe(targetImage);
+      }
+    </script>
   </body>
 </html>

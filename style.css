@@ -67,6 +67,32 @@ ul {
   color: #fff;
 }
 
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+.hamburger.active .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
 /* Hero Section */
 .hero {
   height: 70vh;
@@ -148,6 +174,76 @@ h2 {
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #666;
+}
+
+/* Latest Release Section */
+.latest-release {
+  background-color: #080808;
+}
+
+.release-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.release-text h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.release-text p {
+  color: #999;
+  margin-bottom: 2rem;
+}
+
+.track-list {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.track-item {
+  margin-bottom: 1.5rem;
+}
+
+.track-name {
+  display: block;
+  color: #ccc;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+audio {
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+}
+
+#ps5-animation-container {
+  width: 100%;
+  height: 400px;
+  background: #000;
+  border: 1px solid #333;
+  border-radius: 16px; /* Smooth corners like PS5 UI */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.placeholder-message {
+  color: #444;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 /* Booking Section */
@@ -255,6 +351,28 @@ h2 {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    left: -100%;
+    top: 70px;
+    flex-direction: column;
+    background-color: #000;
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+    padding: 2rem 0;
+    gap: 2rem;
+  }
+
+  .nav-links.active {
+    left: 0;
+  }
+
   .contact-info {
     flex-direction: column;
     gap: 2rem;
@@ -262,7 +380,8 @@ h2 {
   }
 
   .about-content,
-  .booking-content {
+  .booking-content,
+  .release-layout {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
@@ -271,8 +390,112 @@ h2 {
     font-size: 3.5rem;
   }
 
+  .hero-logo {
+    width: 250px;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  .navbar {
+    padding: 1rem 0;
+  }
+
+  .logo img {
+    height: 50px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    height: 60vh;
+  }
+
+  .title {
+    font-size: 4.5rem;
+  }
+
+  .hero-logo {
+    width: 300px;
+  }
+
+  .about-content,
+  .booking-content {
+    gap: 3rem;
+  }
+
+  .release-layout {
+    grid-template-columns: 1fr;
+  }
+
+  section {
+    padding: 4rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 50vh;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .hero-logo {
+    width: 200px;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
+
+  .navbar {
+    padding: 0.75rem 0;
+  }
+
+  .logo img {
+    height: 40px;
+  }
+
   .nav-links {
-    display: none; /* Simple hide for mobile, would need JS for toggle */
+    top: 60px;
+    padding: 1.5rem 0;
+    gap: 1.5rem;
+  }
+
+  .bar {
+    width: 20px;
+    height: 2px;
+    margin: 2px 0;
+  }
+
+  .contact-info {
+    padding: 1.5rem;
+  }
+
+  .social-links {
+    gap: 1.5rem;
+  }
+
+  .social-icon {
+    font-size: 1.2rem;
+  }
+
+  .footer {
+    padding: 2rem 0;
+    font-size: 0.7rem;
   }
 }
 
@@ -341,4 +564,28 @@ h2 {
   opacity: 1;
   transform: translateX(0);
   transition-delay: 0.9s;
+}
+
+/* Floating Mute Button */
+.mute-toggle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 2000;
+  transition: all 0.3s ease;
+}
+
+.mute-toggle:hover {
+  background-color: #fff;
+  color: #000;
+  transform: scale(1.1);
 }
