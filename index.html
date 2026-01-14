@@ -175,7 +175,9 @@
       const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('reveal-color');
+            entry.target.classList.add("reveal-color");
+          } else {
+            entry.target.classList.remove("reveal-color");
           }
         });
       }, { threshold: 0.3 }); // Trigger when 30% of the image is visible
